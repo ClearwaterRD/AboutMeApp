@@ -12,7 +12,7 @@ class LogInViewController: UIViewController {
     @IBOutlet weak var userNameTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
     
-    let userName = "Champion"
+    let userName = "Champ"
     let password = "qwerty10"
     
     // MARK: Override Methods
@@ -43,9 +43,13 @@ class LogInViewController: UIViewController {
 
     // MARK: IBActions
     @IBAction func forgotLoginDetails(_ sender: UIButton) {
-        sender.tag == 0
-        ? showAlert(title: "HI👋🏻", message: "Your User Name is - \(userName)")
-        : showAlert(title: "HI👋🏻", message: "Your Password is - \(password)")
+        sender.tag == 0 ? showAlert(
+            title: "HI👋🏻",
+            message: "Your User Name is - \(userName)"
+        ) : showAlert(
+            title: "HI👋🏻",
+            message: "Your Password is - \(password)"
+        )
     }
     
     
