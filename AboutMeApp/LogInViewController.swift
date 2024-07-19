@@ -7,19 +7,15 @@
 
 import UIKit
 
-class LogInViewController: UIViewController {
+final class LogInViewController: UIViewController {
     // MARK: Outlets & Properties
     @IBOutlet weak var userNameTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
     
-    let userName = "Champ"
-    let password = "qwerty10"
+    private let userName = "Champ"
+    private let password = "qwerty10"
     
     // MARK: Override Methods
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         self.view.endEditing(true)
@@ -43,13 +39,17 @@ class LogInViewController: UIViewController {
 
     // MARK: IBActions
     @IBAction func forgotLoginDetails(_ sender: UIButton) {
-        sender.tag == 0 ? showAlert(
-            title: "HI👋🏻",
-            message: "Your User Name is - \(userName)"
-        ) : showAlert(
-            title: "HI👋🏻",
-            message: "Your Password is - \(password)"
-        )
+        sender.tag == 0
+        ? showAlert(title: "HI👋🏻", message: "Your User Name is - \(userName)") {
+            if self.userNameTF.text != self.userName {
+                self.userNameTF.text = ""
+            }
+        }
+        : showAlert(title: "HI👋🏻", message: "Your Password is - \(password)") {
+            if self.passwordTF.text != self.password {
+                self.passwordTF.text = ""
+            }
+        }
     }
     
     
@@ -60,11 +60,10 @@ class LogInViewController: UIViewController {
     }
     
     // MARK: Methods
-    func showAlert(title: String, message: String) {
+    func showAlert(title: String, message: String, completion: (() -> Void)? = nil) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .default) { _ in
-            self.userNameTF.text = ""
-            self.passwordTF.text = ""
+            completion?()
         }
         alert.addAction(action)
         present(alert, animated: true)

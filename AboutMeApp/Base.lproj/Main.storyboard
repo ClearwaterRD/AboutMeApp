@@ -112,7 +112,6 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Log Out"/>
                                 <connections>
-                                    <action selector="logOutButtonDidTapped" destination="sS6-Jw-Y9e" eventType="touchUpInside" id="M1V-4J-ERC"/>
                                     <segue destination="eeU-vY-8uZ" kind="unwind" unwindAction="unwindFor:" id="cHx-H6-gIR"/>
                                 </connections>
                             </button>

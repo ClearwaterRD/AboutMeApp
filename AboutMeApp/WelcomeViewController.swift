@@ -21,8 +21,5 @@ class WelcomeViewController: UIViewController {
         view.backgroundColor = .systemMint
     }
 
-    @IBAction func logOutButtonDidTapped() {
-    }
-    
-    
+       
 }
