@@ -12,25 +12,40 @@ final class LogInViewController: UIViewController {
     @IBOutlet weak var userNameTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
     
-    private let userName = "Champ"
-    private let password = "qwerty10"
+    private let user = User.getUserInfo()
+    private let person = Person.getBio()
+    
     
     // MARK: Override Methods
+    override func viewDidLoad() {
+        userNameTF.text = user.login
+        passwordTF.text = user.password
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         self.view.endEditing(true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let welcomeVC = segue.destination as? WelcomeViewController else {
-            return
+        let tabBarVC = segue.destination as? UITabBarController
+        
+        tabBarVC?.viewControllers?.forEach {  viewController in
+            if let welcomeVc = viewController as? WelcomeViewController  {
+                welcomeVc.userName = user.login
+                welcomeVc.person = person
+            } else if let navigationVC = viewController as? UINavigationController {
+                let bioVC = navigationVC.topViewController as? BioViewController
+                bioVC?.person = person
+            }
         }
-        welcomeVC.userName = userName
+        
     }
+        
     
     
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        guard userNameTF.text == userName, passwordTF.text == password else {
+        guard userNameTF.text == user.login, passwordTF.text == user.password else {
             showAlert(title: "Ooops", message: "Double Check Your User Name Or Password")
             return false
         }
@@ -40,13 +55,13 @@ final class LogInViewController: UIViewController {
     // MARK: IBActions
     @IBAction func forgotLoginDetails(_ sender: UIButton) {
         sender.tag == 0
-        ? showAlert(title: "HI👋🏻", message: "Your User Name is - \(userName)") {
-            if self.userNameTF.text != self.userName {
+        ? showAlert(title: "HI👋🏻", message: "Your User Name is - \(user.login)") {
+            if self.userNameTF.text != self.user.login {
                 self.userNameTF.text = ""
             }
         }
-        : showAlert(title: "HI👋🏻", message: "Your Password is - \(password)") {
-            if self.passwordTF.text != self.password {
+        : showAlert(title: "HI👋🏻", message: "Your Password is - \(user.password)") {
+            if self.passwordTF.text != self.user.password {
                 self.passwordTF.text = ""
             }
         }
@@ -55,8 +70,8 @@ final class LogInViewController: UIViewController {
     
     
     @IBAction func unwind(for segue: UIStoryboardSegue) {
-        userNameTF.text = ""
-        passwordTF.text = ""
+        userNameTF.text = user.login
+        passwordTF.text = user.password
     }
     
     // MARK: Methods
@@ -69,5 +84,6 @@ final class LogInViewController: UIViewController {
         present(alert, animated: true)
     }
    
+  
 }
 
