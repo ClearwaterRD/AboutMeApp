@@ -7,11 +7,16 @@
 
 import UIKit
 
-class AdditionalInfoViewController: UIViewController {
-
+final class AdditionalInfoViewController: UIViewController {
+    @IBOutlet weak var infoLabel: UILabel!
+    
+    var person: Person!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        infoLabel.text = person.additionalInfo
         
     }
     

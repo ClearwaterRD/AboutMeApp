@@ -11,9 +11,17 @@ struct Person {
     let company: String
     let department: String
     let post: String
+    let additionalInfo: String
     
     static func getBio() -> Person {
-        Person(name: "Mr", lastName: "Perfecto", company: "StarWars", department: "Allian Translator", post: "Helper")
+        Person(
+            name: "Bruce",
+            lastName: "Banner",
+            company: "Avengers",
+            department: "Protecting The Planet",
+            post: "Bouncer",
+            additionalInfo: "The child of an abusive father, Bruce Banner grew up shy and introverted, yet a scientific genius. As a young man, thanks to his standout work in the field of nuclear physics, he attracted the attention of the U.S. Army who wanted to adapt his theories for weaponry."
+        )
     }
 }
 

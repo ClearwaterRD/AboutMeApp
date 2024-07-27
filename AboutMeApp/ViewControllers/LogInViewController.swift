@@ -37,6 +37,7 @@ final class LogInViewController: UIViewController {
             } else if let navigationVC = viewController as? UINavigationController {
                 let bioVC = navigationVC.topViewController as? BioViewController
                 bioVC?.person = person
+    
             }
         }
         
