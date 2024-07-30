@@ -13,7 +13,7 @@ final class LogInViewController: UIViewController {
     @IBOutlet weak var passwordTF: UITextField!
     
     private let user = User.getUserInfo()
-    private let person = Person.getBio()
+   
     
     
     // MARK: Override Methods
@@ -24,7 +24,7 @@ final class LogInViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
-        self.view.endEditing(true)
+        view.endEditing(true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -32,11 +32,11 @@ final class LogInViewController: UIViewController {
         
         tabBarVC?.viewControllers?.forEach {  viewController in
             if let welcomeVc = viewController as? WelcomeViewController  {
-                welcomeVc.userName = user.login
-                welcomeVc.person = person
+                welcomeVc.user = user
+                
             } else if let navigationVC = viewController as? UINavigationController {
                 let bioVC = navigationVC.topViewController as? BioViewController
-                bioVC?.person = person
+                bioVC?.user = user
     
             }
         }

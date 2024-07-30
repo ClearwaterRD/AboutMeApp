@@ -20,37 +20,37 @@ final class BioViewController: UIViewController {
     
     
     
-    var person: Person!
+    var user: User!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupImage()
         
-        self.title = "\(person.name) \(person.lastName)"
+        view.backgroundColor = .systemMint
         
-        nameLabel.text = person.name
-        lastNameLabel.text = person.lastName
-        companyLabel.text = person.company
-        departmentLabel.text = person.department
-        postLabel.text = person.post
+        self.title = "\(user.person.name) \(user.person.lastName)"
         
-//        setupImage()
+        nameLabel.text = user.person.name
+        lastNameLabel.text = user.person.lastName
+        companyLabel.text = user.person.company
+        departmentLabel.text = user.person.department
+        postLabel.text = user.person.post
+        
+       
     }
     
-    override func viewWillLayoutSubviews() {
-        setupImage()
-    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let additionalVC = segue.destination as? AdditionalInfoViewController else {
             return
         }
-        additionalVC.person = person
+        additionalVC.user = user
     }
     
     
-    func setupImage() {
+    private func setupImage() {
         profileImage.image = UIImage(
-            named: "hulkImage"
+            named: user.person.personImage
         )
         profileImage.contentMode = .scaleAspectFill
         profileImage.layer.cornerRadius = profileImage.frame.width / 2
@@ -58,3 +58,4 @@ final class BioViewController: UIViewController {
     }
     
 }
+

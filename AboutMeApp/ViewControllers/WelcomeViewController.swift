@@ -11,14 +11,13 @@ final class WelcomeViewController: UIViewController {
     
     @IBOutlet weak var welcomeTextLabel: UILabel!
     
-    var userName: String!
-    var person: Person!
+    var user: User!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        welcomeTextLabel.text = "Welcome, \(userName ?? "")\nMy name is \(person.name) \(person.lastName)!"
+        welcomeTextLabel.text = "Welcome, \(user.login)\nMy name is \(user.person.name) \(user.person.lastName)!"
         
         view.backgroundColor = .systemMint
         
@@ -28,16 +27,10 @@ final class WelcomeViewController: UIViewController {
     
     // MARK: Methods
     
-    func setupTabBar() {
-        if let tabBarController = self.tabBarController {
-            if let firstItem = tabBarController.tabBar.items?[0] {
-                firstItem.title = "Welcome"
-            }
-            
-            if let secondItem = tabBarController.tabBar.items?[1] {
-                secondItem.title = person.name + person.lastName
-            }
-        }
+    private func setupTabBar() {
+        guard let vcItem = tabBarController?.tabBar.items else { return }
+        vcItem.first?.title = "Welcome"
+        vcItem.last?.title = "\(user.person.name) \(user.person.lastName)"
     }
        
 }

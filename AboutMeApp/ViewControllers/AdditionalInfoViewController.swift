@@ -10,17 +10,17 @@ import UIKit
 final class AdditionalInfoViewController: UIViewController {
     @IBOutlet weak var infoLabel: UILabel!
     
-    var person: Person!
+    var user: User!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemMint
+        infoLabel.textColor = .white
+        infoLabel.text = user.person.additionalInfo
         
-        infoLabel.text = person.additionalInfo
-        
+        navigationController?.navigationBar.tintColor = UIColor.white
     }
     
-
-   
-
 }
+
